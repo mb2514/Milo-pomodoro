@@ -1,6 +1,8 @@
 let timeLeft;
 let timerId = null;
 let isWorkTime = true;
+let storedWorkTime = null;
+let storedBreakTime = null;
 
 const minutesDisplay = document.getElementById('minutes');
 const secondsDisplay = document.getElementById('seconds');
@@ -22,8 +24,24 @@ function updateDisplay() {
 }
 
 function switchMode() {
+    // Store current time before switching
+    if (isWorkTime) {
+        storedWorkTime = timeLeft;
+    } else {
+        storedBreakTime = timeLeft;
+    }
+    
     isWorkTime = !isWorkTime;
-    timeLeft = isWorkTime ? WORK_TIME : BREAK_TIME;
+    
+    // Use stored time if available, otherwise use default
+    if (isWorkTime && storedWorkTime !== null) {
+        timeLeft = storedWorkTime;
+    } else if (!isWorkTime && storedBreakTime !== null) {
+        timeLeft = storedBreakTime;
+    } else {
+        timeLeft = isWorkTime ? WORK_TIME : BREAK_TIME;
+    }
+    
     modeText.textContent = isWorkTime ? "It's time to work 🧑‍💼" : "It's time for a break 🧘";
     toggleButton.innerHTML = isWorkTime ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
     updateDisplay();
@@ -32,7 +50,7 @@ function switchMode() {
 function startTimer() {
     if (timerId === null) {
         if (timeLeft === undefined) {
-            timeLeft = WORK_TIME;
+            timeLeft = isWorkTime ? WORK_TIME : BREAK_TIME;
         }
         
         timerId = setInterval(() => {
@@ -60,6 +78,8 @@ function resetTimer() {
     pauseTimer();
     isWorkTime = true;
     timeLeft = WORK_TIME;
+    storedWorkTime = null;
+    storedBreakTime = null;
     modeText.textContent = "It's time to work 🧑‍💼";
     toggleButton.innerHTML = '<i class="fas fa-moon"></i>';
     updateDisplay();
