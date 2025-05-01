@@ -24,8 +24,8 @@ function updateDisplay() {
 function switchMode() {
     isWorkTime = !isWorkTime;
     timeLeft = isWorkTime ? WORK_TIME : BREAK_TIME;
-    modeText.textContent = isWorkTime ? "It's time to work 🧑‍💼" : 'Break Time';
-    toggleButton.textContent = isWorkTime ? 'Switch to Break' : 'Switch to Work';
+    modeText.textContent = isWorkTime ? "It's time to work 🧑‍💼" : "It's time for a break 🧘";
+    toggleButton.innerHTML = isWorkTime ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
     updateDisplay();
 }
 
@@ -61,7 +61,7 @@ function resetTimer() {
     isWorkTime = true;
     timeLeft = WORK_TIME;
     modeText.textContent = "It's time to work 🧑‍💼";
-    toggleButton.textContent = 'Switch to Break';
+    toggleButton.innerHTML = '<i class="fas fa-moon"></i>';
     updateDisplay();
 }
 
