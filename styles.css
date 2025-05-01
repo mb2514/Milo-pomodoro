@@ -74,13 +74,28 @@ body::before {
     100% { transform: translateY(0); }
 }
 
-h1 {
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
     font-family: 'Permanent Marker', cursive;
     font-size: 3rem;
     margin-bottom: 2rem;
     color: var(--primary-pink);
     text-shadow: 3px 3px var(--primary-blue);
     letter-spacing: 2px;
+}
+
+.header .title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1;
+}
+
+.header i {
+    font-size: 2.5rem;
 }
 
 .timer {
@@ -236,12 +251,16 @@ h1 {
     .controls button {
         width: 100%;
     }
-    
-    h1 {
-        font-size: 1.8rem;
-        padding-top: 2rem;
-        margin-bottom: 1.5rem;
-        padding-right: 40px;
+
+    .header {
+        font-size: 2.5rem;
+        padding-top: 1.5rem;
+        margin-bottom: 2rem;
+        padding-right: 35px;
+    }
+
+    .header i {
+        font-size: 2rem;
     }
 
     .mode-toggle {
